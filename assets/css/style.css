@@ -1,61 +1,84 @@
 *{
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
-}
-
-button:hover{
-    cursor: pointer;
 }
 
 .hidden{
     display: none;
 }
 
-.i100{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.visible{
+    display: block;
 }
 
-.background{
+.container{
     width: 100%;
     height: 100vh;
-    background-color: #4d4a4a;
+    max-height: 100vh;
+    background-color: #ad6666;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.carusel{
-    width: 40rem;
-    height: 20rem;
-    background-color: rebeccapurple;
+.boxSlider{
+    width: 50rem;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    display: flex;
     position: relative;
 }
 
-.img-slider{
-    width: 40rem;
-    height: 20rem;
+.imgSlider{
+    width: 100%;
 }
+
+.imgSlider > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.imgSlider > img.visible{
+    display: block;
+}
+
+.miniature{
+    background-color: transparent;
+    flex-basis: 20%;
+    flex-shrink: 1;
+    height: 100%;
+    position: relative;
+    
+}
+
+.miniature > img {
+    width: 100%;
+    height: calc(100% / 5);
+    object-fit: cover;
+    display: block;
+}
+
 
 .btn{
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: lightcoral;
     border: none;
-    background-color: red;
-    color: white;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
-.left{
+.next{
     position: absolute;
-    top: 49%;
-    left: 0;
+    bottom: 0;
+    right: 50%;
 }
 
-.right{
+.previous{
     position: absolute;
-    top: 49%;
-    right: 0;
+    top: 0;
+    right: 50%;
 }

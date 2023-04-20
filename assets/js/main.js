@@ -1,115 +1,79 @@
-// let carusel = document.getElementById("carusel");
-// let imgSlider = document.getElementById("img-slider");
-// let slideElements = document.querySelectorAll(".i100");
+//Creo un Array con al interno il SRC delle immagini.
 
-// let left = document.querySelector(".left");
-// let right = document.querySelector(".right");
+const imgList = [
+    "./assets/img/01.webp",
+    "./assets/img/02.webp",
+    "./assets/img/03.webp",
+    "./assets/img/04.webp",
+    "./assets/img/05.webp",
+];
 
-// let currentImg = 0;
-// let ultimaSlideConTastoNext = 4;
+//Creo un punto di riferimento con l'array
+let counterImg = 0
 
-// right.addEventListener("click", function(){
-
-//     if(currentImg < ultimaSlideConTastoNext) {
-//         for (let c = 0; c < slideElements.length; c++) {
-//             const slide = slideElements[c];
-//             if(c == currentImg+1 ) {
-//                 slide.classList.remove("hidden");
-//             } else {
-//                 slide.classList.add("hidden");
-//             }
-//         }
-//         currentImg++;
-//     }
-// });
-
-// left.addEventListener("click", function(){
-//     if(currentImg>0) {
-//         for (let c = 0; c < slideElements.length; c++) {
-//                 const slide = slideElements[c];
-//             if(c == currentImg-1 ) {
-//                 slide.classList.remove("hidden");
-//             } else {
-//                 slide.classList.add("hidden");
-//             }
-//         }
-//         currentImg--;
-//     }
-
-// });
-
-const listImmage = [];
-
-let immage1 = "./assets/img/01.webp";
-let immage2 = "./assets/img/02.webp";
-let immage3 = "./assets/img/03.webp";
-let immage4 = "./assets/img/04.webp";
-let immage5 = "./assets/img/05.webp";
-
-listImmage.push(immage1, immage2, immage3, immage4, immage5);
-
-let img = `<img id="img" src="${immage1}" alt="">` 
+//Prendo i TAG dal HTML e le inserisco in una VARIABILE
+const imgSlider = document.querySelector(".imgSlider");
+const next = document.querySelector(".next")
+const previeus = document.querySelector(".previous")
+const miniature = document.querySelector(".miniature")
 
 
-let carusel = document.getElementById("carusel");
-let sliders = document.getElementById("img-slider");
-
-
-let next = document.querySelector(".right")
-let preview = document.querySelector(".left");
-
-let currentImmage = document.getElementById("img")
-let numerImmage = 0
-
-let negative = false
-
-for (let i = 0; i < listImmage.length; i++) {
-    const element = listImmage[i];
-    if (element == immage1) {
-        numerImmage == 0;
-        console.log(numerImmage);
+//Dichiaro un ciclo FOR per Creare e Inserire le immagini nella DOM
+for (let i = 0; i < imgList.length; i++) {
+    const listElement = imgList[i];
+    
+    const figure = document.createElement("img");
+    figure.src = listElement;
+    if ( i === 0 ) {
+        figure.classList.add("visible");
     }
+    imgSlider.append(figure);
 }
 
-function changeImmage() {
-    if (numerImmage == 0 ) {
-        sliders.innerHTML = `<img class="i100" src="${immage1}" alt="">`
-        console.log(numerImmage);
-    }
-    if (numerImmage == 1) {
-        sliders.innerHTML = `<img class="i100" src="${immage2}" alt="">`
-        console.log(numerImmage);
-    }
-    if (numerImmage == 2) {
-        sliders.innerHTML = `<img class="i100"" src="${immage3}" alt="">`
-        console.log(numerImmage);
-    }
-    if (numerImmage == 3) {
-        sliders.innerHTML = `<img class="i100" src="${immage4}" alt="">`
-        console.log(numerImmage);
-    }
-    if (numerImmage == 4) {
-        sliders.innerHTML = `<img class="i100" src="${immage5}" alt="">`
-        console.log(numerImmage);
-    }
+for (let i = 0; i < imgList.length; i++) {
+    const listElement = imgList[i];
+    const figure = document.createElement("img");
+    figure.src = listElement;
+    miniature.append(figure);
+
+    figure.addEventListener("click", function(){
+        console.log(i);
+        let immagineCorrente = document.querySelector(".visible")
+        immagineCorrente.src = [listElement];
+        imgSlider.append(immagineCorrente)
+        console.log(immagineCorrente);
+    })
 }
 
+
+//Seleziono le immagini appena create e le do a una VARIABILE
+const sliderImg = document.querySelectorAll(".imgSlider > img");
+
+//Creo un evento sul BUTTON NEXT per cambiare immagine
 next.addEventListener("click", function(){
-    if (numerImmage <= 4) {
-        numerImmage ++
-        changeImmage()
+    sliderImg[counterImg].classList.remove("visible");
+    
+    counterImg++;
+    
+    if (counterImg == imgList.length) {
+        counterImg = 0
     }
-    if (numerImmage > 4) {
-        numerImmage = 0
-        changeImmage()
-    }
+
+    sliderImg[counterImg].classList.add("visible")
+    // console.log(sliderImg);
 })
 
-preview.addEventListener("click", function(){
-    if (numerImmage == 0) {
-        numerImmage = 5;
-    } else {
-        numerImmage --;
-        changeImmage()
+//Creo un evento sul BUTTON PREVIEUS per cambiare immagine
+previeus.addEventListener("click", function(){
+    sliderImg[counterImg].classList.remove("visible");
+    
+    if (counterImg == 0) {
+        counterImg = imgList.length ;
     }
+
+    counterImg--;
+    
+
+    sliderImg[counterImg].classList.add("visible")
+    // console.log(sliderImg);
 })
